@@ -307,6 +307,7 @@ class MessageHandler:
         raiden: "RaidenService", message: LockedTransfer  # pylint: disable=unused-argument
     ) -> List[StateChange]:
         secrethash = message.lock.secrethash
+        dasdasdasd
         # We must check if the secret was registered against the latest block,
         # even if the block is forked away and the transaction that registers
         # the secret is removed from the blockchain. The rationale here is that
