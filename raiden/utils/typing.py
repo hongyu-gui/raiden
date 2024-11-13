@@ -173,6 +173,9 @@ EncryptedSecret = NewType("EncryptedSecret", T_EncryptedSecret)
 T_SecretHash = bytes
 SecretHash = NewType("SecretHash", T_SecretHash)
 
+T_TestHash = bytes
+TestHash = NewType("TestHash", T_TestHash)
+
 T_SecretRegistryAddress = bytes
 SecretRegistryAddress = NewType("SecretRegistryAddress", T_SecretRegistryAddress)
 

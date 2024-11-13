@@ -36,6 +36,7 @@ from raiden.utils.typing import (
     PaymentWithFeeAmount,
     Secret,
     SecretHash,
+    TestHash,
     TargetAddress,
     TokenAddress,
     TokenAmount,
@@ -110,6 +111,7 @@ class Lock:
     amount: PaymentWithFeeAmount
     expiration: BlockExpiration
     secrethash: SecretHash
+    testhash: TestHash
 
     def __post_init__(self) -> None:
         # guarantee that `amount` can be serialized using the available bytes
@@ -431,6 +433,7 @@ class LockedTransferBase(EnvelopeMessage):
             + initiator
             + lock.secrethash
             + lock.amount.to_bytes(32, byteorder="big")
+            + lock.testhash
         )
 
 
