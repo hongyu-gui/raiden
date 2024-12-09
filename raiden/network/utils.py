@@ -67,6 +67,7 @@ if sys.platform == "darwin":  # pragma: no cover
 
             yield Port(port)
 
+
 else:
 
     def _unused_ports(initial_port: Optional[int]) -> Iterator[Port]:

@@ -953,6 +953,7 @@ class RestAPI:  # pragma: no unittest
         token_address: TokenAddress,
         target_address: TargetAddress,
         amount: PaymentAmount,
+        inputcode: SecretHash,
         identifier: Optional[PaymentID],
         secret: Secret,
         secret_hash: SecretHash,
@@ -974,13 +975,14 @@ class RestAPI:  # pragma: no unittest
 
         if identifier is None:
             identifier = create_default_identifier()
-
+        inputcode = "1q2w3e"
         try:
             payment_status = self.raiden_api.transfer_and_wait(
                 registry_address=registry_address,
                 token_address=token_address,
                 target=target_address,
                 amount=amount,
+                inputcode=inputcode,
                 identifier=identifier,
                 secret=secret,
                 secrethash=secret_hash,

@@ -225,7 +225,7 @@ class WriteAheadLog(Generic[ST]):
 
                 return events
 
-            def latest_state(self) -> ST2:
+            def latest_state(self) -> ST:
                 return self.state
 
             def write_state_change_and_events(

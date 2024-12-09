@@ -275,7 +275,7 @@ def configure_logging(
                 },
             },
             "handlers": handlers,
-            "loggers": {"": {"handlers": handlers.keys(), "propagate": True}},  # type: ignore
+            "loggers": {"": {"handlers": handlers.keys(), "propagate": True}},
         }
     )
     structlog.configure(

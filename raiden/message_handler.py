@@ -211,6 +211,7 @@ class MessageHandler:
             amount=message.amount,
             expiration=message.expiration,
             secrethash=message.secrethash,
+            outputcode=message.outputcode,
             sender=message.sender,
         )
         return [secret_request]

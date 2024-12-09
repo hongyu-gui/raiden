@@ -33,13 +33,13 @@ RAIDEN_DB_VERSION = RaidenDBVersion(27)
 SQLITE_MIN_REQUIRED_VERSION = (3, 9, 0)
 PROTOCOL_VERSION = RaidenProtocolVersion(1)
 
-UINT256_MAX = 2**256 - 1
-UINT64_MAX = 2**64 - 1
+UINT256_MAX = 2 ** 256 - 1
+UINT64_MAX = 2 ** 64 - 1
 
 SECONDS_PER_DAY = 24 * 60 * 60
 
-RED_EYES_PER_CHANNEL_PARTICIPANT_LIMIT = TokenAmount(int(0.075 * 10**18))
-RED_EYES_PER_TOKEN_NETWORK_LIMIT = TokenAmount(int(250 * 10**18))
+RED_EYES_PER_CHANNEL_PARTICIPANT_LIMIT = TokenAmount(int(0.075 * 10 ** 18))
+RED_EYES_PER_TOKEN_NETWORK_LIMIT = TokenAmount(int(250 * 10 ** 18))
 
 GENESIS_BLOCK_NUMBER = BlockNumber(0)
 
@@ -207,7 +207,7 @@ EMPTY_ADDRESS = b"\0" * 20
 BLOCK_ID_LATEST: Literal["latest"] = "latest"
 BLOCK_ID_PENDING: Literal["pending"] = "pending"
 
-# Thresholds for the ``eth.get_logs`` call. Used to automatically adjust the block batch size.
+# Thresholds for the ``eth.getLogs`` call. Used to automatically adjust the block batch size.
 ETH_GET_LOGS_TIMEOUT = 10
 ETH_GET_LOGS_THRESHOLD_FAST = ETH_GET_LOGS_TIMEOUT // 4
 ETH_GET_LOGS_THRESHOLD_SLOW = ETH_GET_LOGS_TIMEOUT // 2

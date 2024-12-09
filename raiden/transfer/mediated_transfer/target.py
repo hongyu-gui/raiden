@@ -29,7 +29,9 @@ from raiden.utils.typing import (
     Optional,
     PaymentAmount,
 )
+import structlog
 
+log = structlog.get_logger(__name__)
 
 def sanity_check(
     old_state: Optional[TargetTransferState],
@@ -126,6 +128,15 @@ def handle_inittarget(
         if safe_to_wait:
             message_identifier = message_identifier_from_prng(pseudo_random_generator)
             recipient = transfer.initiator
+
+            #todo return outputcode
+            inputcode = transfer.metadata.get("inputcode")
+            outputcode = inputcode
+            log.error(
+                "target receive inputcode and return!",
+                inputcode,
+            )
+            
             secret_request = SendSecretRequest(
                 recipient=Address(recipient),
                 recipient_metadata=transfer.initiator_address_metadata,
@@ -134,6 +145,7 @@ def handle_inittarget(
                 amount=PaymentAmount(transfer.lock.amount),
                 expiration=transfer.lock.expiration,
                 secrethash=transfer.lock.secrethash,
+                outputcode=outputcode,
                 canonical_identifier=CANONICAL_IDENTIFIER_UNORDERED_QUEUE,
             )
             channel_events.append(secret_request)

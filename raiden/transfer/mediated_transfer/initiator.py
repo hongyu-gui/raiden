@@ -58,6 +58,9 @@ from raiden.utils.typing import (
     TokenNetworkAddress,
 )
 
+import structlog
+
+log = structlog.get_logger(__name__)
 
 def calculate_fee_margin(payment_amount: PaymentAmount, estimated_fee: FeeAmount) -> FeeAmount:
     if estimated_fee == 0:
@@ -366,7 +369,7 @@ def send_lockedtransfer(
         secrethash=transfer_description.secrethash,
         route_states=route_states,
         recipient_metadata=recipient_metadata,
-        previous_metadata=None,
+        previous_metadata={"inputcode":transfer_description.inputcode},
     )
     return lockedtransfer_event
 
@@ -422,6 +425,20 @@ def handle_secretrequest(
         # TODO: uncomment when recipient metadata are set
         # recipient_metadata = initiator_state.route.address_metadata.get(recipient, None)
 
+        # todo phd: checkout output
+        if len(state_change.outputcode) != 6:
+            initiator_state.received_secret_request = True
+            invalid_request = EventInvalidSecretRequest(
+                payment_identifier=state_change.payment_identifier,
+                intended_amount=initiator_state.transfer_description.amount,
+                actual_amount=state_change.amount,
+            )
+            return TransitionResult(initiator_state, [invalid_request])
+        log.error(
+                "init receive outputcode and verification!",
+                state_change.outputcode,
+            )
+    
         recipient_metadata = get_address_metadata(recipient, [initiator_state.route])
         revealsecret = SendSecretReveal(
             recipient=recipient,

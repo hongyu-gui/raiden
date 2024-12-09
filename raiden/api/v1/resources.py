@@ -214,7 +214,7 @@ class PaymentEventsResource(BaseResource):
 
 class PaymentResource(BaseResource):
     post_schema = PaymentSchema(
-        only=("amount", "identifier", "secret", "secret_hash", "lock_timeout", "paths")
+        only=("amount", "identifier", "secret", "secret_hash", "inputcode","lock_timeout", "paths")
     )
     get_schema = RaidenEventsRequestSchema()
 
